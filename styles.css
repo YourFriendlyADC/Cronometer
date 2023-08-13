@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #9fb8cb;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  color: #314954;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+#timer {
+  font-size: 4rem;
+  margin: 20px;
+  color: #314954;
+}
+
+#laps {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #314954;
+  text-align: left;
+}
+
+#lapsContainer {
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+  font-size: 2rem;
+  margin-bottom: .75em;
+  color: #314954;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1.2em;
+}
+
+.button {
+  background-color: #9a7b0b;
+  color: #d6e5f0;
+  padding: .5em 1em;
+  border: none;
+  border-radius: 5em;
+  cursor: pointer;
+  font-size: 1.25em; 
+}
+
+#startStop {
+  background-color: #d6ae20;
+}
+
+#lap {
+  background-color: #bd9813;
+}
+
+#reset {
+  background-color: #a7860f;
+}
+
+a {
+  display: inline-block;
+  background-color: #333;
+  color: #d6e5f0;
+  padding: 1em 1.5em;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+a:hover, .button:hover {
+  background-color: #b59318;
+}

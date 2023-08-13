@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <link rel="icon" href="icon.png" type="image/x-icon"> <!-- Agrega el favicon -->
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon"> <!-- Agrega el favicon -->
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <h1>Cronómetro</h1>
+    <div id="timer">00:00:00:000</div>
+    <div id="lapsContainer"> <!-- Contenedor para mostrar los laps con scroll -->
+      <div id="laps"></div> <!-- Espacio para mostrar los laps -->
+    </div>
+    <div class="button-container">
+      <button class="button" id="startStop">Iniciar</button>
+      <button class="button" id="lap">Lap</button>
+      <button class="button" id="reset">Resetear</button>
+      <a class="button" id="export" download="laps.csv">Exportar</a>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
