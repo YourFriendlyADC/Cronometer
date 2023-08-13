@@ -33,16 +33,23 @@ function updateTimer() {
 // Evento para el botón "Iniciar/Parar"
 startStopButton.addEventListener('click', () => {
   if (!isRunning) {
-    console.log('pausado');
-    startTime = Date.now() - pausedTime;
+    if (pausedTime === 0) {
+      startTime = Date.now();
+    } else {
+      startTime = Date.now() - pausedTime;
+      pausedTime = 0; // Reset pausedTime when resuming
+    }
     clearInterval(interval);
     interval = setInterval(updateTimer, 1);
     startStopButton.textContent = 'Parar';
     isRunning = true;
+    // startTime = Date.now() - pausedTime;
+    // clearInterval(interval);
+    // interval = setInterval(updateTimer, 1);
+    // startStopButton.textContent = 'Parar';
+    isRunning = true;
   } else {
-    console.log('pausedTime, ' + pausedTime);
-    pausedTime = Date.now() - startTime; // Guardar el tiempo pausado
-    console.log('pausedTime, ' + pausedTime);
+    pausedTime = Date.now() - startTime + pausedTime; // Guardar el tiempo pausado
     clearInterval(interval);
     startStopButton.textContent = 'Continuar';
     isRunning = false;
@@ -52,7 +59,7 @@ startStopButton.addEventListener('click', () => {
 // Evento para el botón "Lap"
 lapButton.addEventListener('click', () => {
   if (isRunning) {
-    laps.push({ time: Date.now() - startTime });
+    laps.push({ time: Date.now() - startTime});
     updateLaps(); // Llama a la función para actualizar los laps en pantalla
   }
 });
@@ -65,6 +72,8 @@ resetButton.addEventListener('click', () => {
   updateLaps(); // Llama a la función para actualizar los laps en pantalla
   startStopButton.textContent = 'Iniciar';
   isRunning = false;
+  startTime = 0;
+  pausedTime = 0;
 });
 
 // Elemento del DOM para mostrar los laps en pantalla
@@ -77,8 +86,8 @@ function updateLaps() {
 
 // Evento para el botón "Exportar"
 exportLink.addEventListener('click', () => {
-  const csvContent = "Tiempo (HH:MM:SS:MS),Tiempo en Milisegundos\n" +
-    laps.map(lap => `${formatTime(lap.time)},${lap.time / 1}`).join('\n');
+  const csvContent = "Tiempo (HH:MM:SS:MS),Tiempo en Segundos\n" +
+    laps.map(lap => `${formatTime(lap.time)},${lap.time / 1000}`).join('\n');
   
   const blob = new Blob([csvContent], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
