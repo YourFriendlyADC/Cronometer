@@ -12,7 +12,7 @@ const lapButton = document.getElementById('lap');
 const resetButton = document.getElementById('reset');
 const exportLink = document.getElementById('export');
 
-// Función para formatear el tiempo en formato HH:MM:SS
+// Función para formatear el tiempo en formato HH:MM:SS:ms --> Horas:Minutos:Segundos:Milisegundos
 function formatTime(ms) {
   const date = new Date(ms);
   const hours = date.getUTCHours().toString().padStart(2, '0');
