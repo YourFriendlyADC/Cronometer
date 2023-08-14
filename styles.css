@@ -24,8 +24,8 @@ h1 {
   margin-bottom: 10px;
 }
 
-#timer {
-  font-size: 4rem;
+#timer-1, #timer-2 {
+  font-size: 3em;
   margin: 20px;
   color: #314954;
 }

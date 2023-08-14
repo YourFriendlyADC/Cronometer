@@ -1,13 +1,15 @@
 // Variables para controlar el cronómetro y laps
-let startTime = 0;
-let pausedTime = 0;
+let startTime1 = 0;
+let pausedTime1 = 0;
+let startTime2 = 0;
+let pausedTime2 = 0;
 let interval;
 let laps = [];
 let isRunning = false;
 
 // Elementos del DOM
-const timerDisplay = document.getElementById('timer');
-const timerDisplay1 = document.getElementById('timer1');
+const timerDisplay1 = document.getElementById('timer-1');
+const timerDisplay2 = document.getElementById('timer-2');
 const startStopButton = document.getElementById('startStop');
 const lapButton = document.getElementById('lap');
 const resetButton = document.getElementById('reset');
@@ -27,26 +29,31 @@ function formatTime(ms) {
 // Función para actualizar el cronómetro
 function updateTimer() {
   const now = Date.now();
-  const elapsed = now - (startTime + pausedTime);
-  timerDisplay.textContent = formatTime(elapsed);
-  timerDisplay1.textContent = formatTime(elapsed);
+  const elapsed1 = now - (startTime1 + pausedTime1);
+  const elapsed2 = now - (startTime2 + pausedTime2);
+  timerDisplay1.textContent = formatTime(elapsed1);
+  timerDisplay2.textContent = formatTime(elapsed2);
 }
 
 // Evento para el botón "Iniciar/Parar"
 startStopButton.addEventListener('click', () => {
   if (!isRunning) {
-    if (pausedTime === 0) {
-      startTime = Date.now();
+    if (pausedTime1 === 0) {
+      startTime1 = Date.now();
+      startTime2 = Date.now();
     } else {
-      startTime = Date.now() - pausedTime;
-      pausedTime = 0; // Reset pausedTime when resuming
+      startTime1 = Date.now() - pausedTime1;
+      pausedTime1 = 0; // Reset pausedTime when resuming
+      startTime2 = Date.now() - pausedTime2;
+      pausedTime2 = 0;
     }
     clearInterval(interval);
     interval = setInterval(updateTimer, 1);
     startStopButton.textContent = 'Parar';
     isRunning = true;
   } else {
-    pausedTime = Date.now() - startTime + pausedTime; // Guardar el tiempo pausado
+    pausedTime1 = Date.now() - startTime1 + pausedTime1; // Guardar el tiempo pausado
+    pausedTime2 = Date.now() - startTime2 + pausedTime2; // Guardar el tiempo pausado
     clearInterval(interval);
     startStopButton.textContent = 'Continuar';
     isRunning = false;
@@ -56,22 +63,25 @@ startStopButton.addEventListener('click', () => {
 // Evento para el botón "Lap"
 lapButton.addEventListener('click', () => {
   if (isRunning) {
-    laps.push({ time: Date.now() - startTime});
+    laps.push({ time: Date.now() - startTime1});
     updateLaps(); // Llama a la función para actualizar los laps en pantalla
+    startTime1 = Date.now();
   }
 });
 
 // Evento para el botón "Resetear"
 resetButton.addEventListener('click', () => {
   clearInterval(interval);
-  timerDisplay.textContent = '00:00:00:000';
   timerDisplay1.textContent = '00:00:00:000';
+  timerDisplay2.textContent = '00:00:00:000';
   laps = [];
   updateLaps(); // Llama a la función para actualizar los laps en pantalla
   startStopButton.textContent = 'Iniciar';
   isRunning = false;
-  startTime = 0;
-  pausedTime = 0;
+  startTime1 = 0;
+  pausedTime1 = 0;
+  startTime2 = 0;
+  pausedTime2 = 0;
 });
 
 // Elemento del DOM para mostrar los laps en pantalla
